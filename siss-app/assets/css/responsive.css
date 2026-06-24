@@ -1,0 +1,50 @@
+/* ════════════════════════════════════════
+   SISS! — responsive.css
+   Mobile-first breakpoints
+════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  :root { --sidebar: 0px; }
+
+  .sidebar {
+    transform: translateX(-220px);
+    width: 220px;
+  }
+  .sidebar.open { transform: translateX(0); }
+
+  .sidebar-overlay.open { display: block; }
+
+  .hamburger { display: flex; }
+
+  .main { margin-left: 0; }
+
+  .topbar { padding: .85rem 1.25rem .85rem 4rem; }
+  .search-bar { display: none; }
+
+  .page { padding: 1.5rem 1rem; }
+
+  .form-grid    { grid-template-columns: 1fr; }
+  .result-grid  { grid-template-columns: 1fr; }
+  .info-grid    { grid-template-columns: 1fr; }
+  .tracker-grid { grid-template-columns: 1fr; }
+  .organ-container { grid-template-columns: 1fr; }
+
+  .page-title { font-size: 1.5rem; }
+
+  .mood-grid { grid-template-columns: repeat(5,1fr); }
+
+  .tabs { gap: .35rem; }
+  .tab  { padding: .4rem .85rem; font-size: .78rem; }
+}
+
+@media (max-width: 480px) {
+  .result-grid  { grid-template-columns: 1fr 1fr; }
+  .mood-grid    { grid-template-columns: repeat(3,1fr); }
+  .tabs         { flex-wrap: wrap; }
+  .chart-tabs   { flex-wrap: wrap; }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

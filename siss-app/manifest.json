@@ -1,0 +1,47 @@
+{
+  "name": "SISS! — Sisterhood Information & Support System",
+  "short_name": "SISS!",
+  "description": "Teman digitalmu untuk memahami siklus menstruasi, hormon, dan kesehatan reproduksi.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#FDF8F5",
+  "theme_color": "#7B4F6A",
+  "orientation": "portrait-primary",
+  "lang": "id",
+  "categories": ["health", "education"],
+  "icons": [
+    { "src": "assets/icons/icon-72.png",   "sizes": "72x72",   "type": "image/png" },
+    { "src": "assets/icons/icon-96.png",   "sizes": "96x96",   "type": "image/png" },
+    { "src": "assets/icons/icon-128.png",  "sizes": "128x128", "type": "image/png" },
+    { "src": "assets/icons/icon-144.png",  "sizes": "144x144", "type": "image/png" },
+    { "src": "assets/icons/icon-152.png",  "sizes": "152x152", "type": "image/png" },
+    { "src": "assets/icons/icon-192.png",  "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/icons/icon-384.png",  "sizes": "384x384", "type": "image/png" },
+    { "src": "assets/icons/icon-512.png",  "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/screenshots/home.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Beranda SISS!"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Catat Mood",
+      "short_name": "Mood",
+      "description": "Langsung ke halaman catat mood hari ini",
+      "url": "/index.html#mood",
+      "icons": [{ "src": "assets/icons/shortcut-mood.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Pelacak Siklus",
+      "short_name": "Siklus",
+      "description": "Hitung siklus menstruasi",
+      "url": "/index.html#tracker",
+      "icons": [{ "src": "assets/icons/shortcut-tracker.png", "sizes": "96x96" }]
+    }
+  ]
+}

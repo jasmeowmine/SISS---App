@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SISS! — Sisterhood Information & Support System. Teman digital untuk memahami siklus menstruasi, hormon, dan kesehatan reproduksi." />
+  <meta name="theme-color" content="#7B4F6A" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="SISS!" />
+
+  <title>SISS! — Sisterhood Information & Support System</title>
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json" />
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/sidebar.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+
+<!-- ══════════════ HAMBURGER (Mobile) ══════════════ -->
+<button class="hamburger" aria-label="Buka menu">
+  <span></span><span></span><span></span>
+</button>
+<div class="sidebar-overlay"></div>
+
+<!-- ══════════════ SIDEBAR ══════════════ -->
+<nav class="sidebar" aria-label="Navigasi utama">
+  <div class="sidebar-logo">SISS<span>!</span></div>
+
+  <div class="sidebar-section">Utama</div>
+  <button class="nav-item" data-page="home">
+    <span class="ni"></span> Beranda
+  </button>
+  <button class="nav-item" data-page="tracker">
+    <span class="ni"></span> Pelacak Siklus
+  </button>
+  <button class="nav-item" data-page="calendar">
+    <span class="ni"></span> Kalender
+  </button>
+
+  <div class="sidebar-section">Edukasi</div>
+  <button class="nav-item" data-page="education">
+    <span class="ni"></span> Fase & Hormon
+  </button>
+  <button class="nav-item" data-page="organ">
+    <span class="ni"></span> Organ Reproduksi
+  </button>
+
+  <div class="sidebar-section">Tracking</div>
+  <button class="nav-item" data-page="mood">
+    <span class="ni"></span> Mood & Gejala
+  </button>
+  <button class="nav-item" data-page="insights">
+    <span class="ni"></span> Insights
+  </button>
+
+  <div class="sidebar-section">Lainnya</div>
+  <button class="nav-item" data-page="search">
+    <span class="ni"></span> Cari
+  </button>
+
+  <!-- Install PWA button -->
+  <div style="padding:1.5rem 1rem;margin-top:auto">
+    <button id="install-btn" style="display:none;width:100%;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.25);color:white;border-radius:12px;padding:.6rem;font-size:.8rem;font-family:inherit;cursor:pointer;align-items:center;justify-content:center;gap:.5rem">
+      📲 Install SISS! di HP
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════ MAIN CONTENT ══════════════ -->
+<div class="main">
+
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div id="topbar-title" class="topbar-title">Beranda</div>
+    <div class="search-bar">
+      <span class="search-icon"></span>
+      <input id="topbar-search" type="search" placeholder="Cari topik…" aria-label="Pencarian cepat" />
+    </div>
+  </header>
+
+  <!-- ───────── PAGE: BERANDA ───────── -->
+  <section id="page-home" class="page">
+    <div class="page-header">
+      <div class="page-label">Selamat Datang</div>
+      <h1 class="page-title">Halo! Apa kabar hari ini?</h1>
+      <p class="page-desc">SISS adalah temanmu untuk memahami siklus, hormon, dan tubuhmu sendiri.</p>
+    </div>
+
+    <div id="home-cycle-status" style="margin-bottom:1.5rem"></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+      <div class="card" style="cursor:pointer;text-align:center" onclick="window.__SISS_NAV__('tracker')">
+        <div style="font-size:2rem;margin-bottom:.5rem"></div>
+        <div style="font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--ink)">Pelacak Siklus</div>
+        <div style="font-size:.78rem;color:var(--ink-m);margin-top:.25rem">Hitung siklus & fase</div>
+      </div>
+      <div class="card" style="cursor:pointer;text-align:center" onclick="window.__SISS_NAV__('mood')">
+        <div style="font-size:2rem;margin-bottom:.5rem"></div>
+        <div style="font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--ink)">Catat Mood</div>
+        <div style="font-size:.78rem;color:var(--ink-m);margin-top:.25rem">Mood, nyeri & energi</div>
+      </div>
+      <div class="card" style="cursor:pointer;text-align:center" onclick="window.__SISS_NAV__('insights')">
+        <div style="font-size:2rem;margin-bottom:.5rem"></div>
+        <div style="font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--ink)">Insights</div>
+        <div style="font-size:.78rem;color:var(--ink-m);margin-top:.25rem">Pola & analisis data</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Jelajahi Edukasi</div>
+      <p style="font-size:.87rem;color:var(--ink-m);line-height:1.7;margin-bottom:1rem">
+        Pahami 4 fase siklus menstruasimu, peran setiap hormon, dan penyebab gejala yang kamu rasakan — semua berbasis biologi.
+      </p>
+      <button class="btn btn-mauve" onclick="window.__SISS_NAV__('education')">Mulai Belajar →</button>
+    </div>
+  </section>
+
+  <!-- ───────── PAGE: PELACAK SIKLUS ───────── -->
+  <section id="page-tracker" class="page">
+    <div class="page-header">
+      <div class="page-label">Pelacak</div>
+      <h1 class="page-title">Siklus Menstruasimu</h1>
+      <p class="page-desc">Masukkan data siklus untuk mengetahui fase saat ini, prediksi haid berikutnya, dan masa subur.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Masukkan Data Siklus</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="last-period">Tanggal Haid Terakhir</label>
+          <input type="date" id="last-period" />
+        </div>
+        <div class="form-group">
+          <label for="cycle-length">Panjang Siklus (hari)</label>
+          <input type="number" id="cycle-length" value="28" min="21" max="45" />
+        </div>
+        <div class="form-group">
+          <label for="period-duration">Lama Haid (hari)</label>
+          <input type="number" id="period-duration" value="5" min="2" max="10" />
+        </div>
+      </div>
+      <button id="btn-calculate" class="btn btn-mauve">Hitung Siklus</button>
+    </div>
+
+    <div id="current-phase" style="margin-bottom:1rem"></div>
+
+    <div id="tracker-result" class="result-grid" style="display:none"></div>
+
+    <div class="card" style="margin-top:1.25rem">
+      <div class="card-title">Tentang Siklus Normal</div>
+      <div class="info-grid">
+        <div class="info-block">
+          <h4>Siklus Normal</h4>
+          <p>Siklus menstruasi normal berlangsung antara <strong>21–35 hari</strong>. Siklus 28 hari hanya rata-rata — variasi adalah hal yang normal.</p>
+        </div>
+        <div class="info-block">
+          <h4>Kapan ke Dokter?</h4>
+          <p>Periksakan diri jika siklus <strong>sangat tidak teratur</strong>, nyeri sangat parah, atau haid lebih dari 7 hari secara konsisten.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── PAGE: KALENDER ───────── -->
+  <section id="page-calendar" class="page">
+    <div class="page-header">
+      <div class="page-label">Kalender</div>
+      <h1 class="page-title">Kalender Siklus</h1>
+      <p class="page-desc">Visualisasi fase siklus menstruasimu selama sebulan penuh.</p>
+    </div>
+
+    <div class="card">
+      <div class="calendar-header">
+        <button class="cal-nav" id="cal-prev" aria-label="Bulan sebelumnya">‹</button>
+        <div id="cal-month-title" class="cal-month-title">—</div>
+        <button class="cal-nav" id="cal-next" aria-label="Bulan berikutnya">›</button>
+      </div>
+      <div class="cal-grid" id="calendar-grid"></div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#C47A8C55"></div> Menstruasi</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#6B9E7E44"></div> Folikular</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#3d7a5a44"></div> Ovulasi</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#F2C4CE66"></div> Luteal</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#FDDDE699"></div> PMS</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── PAGE: EDUKASI ───────── -->
+  <section id="page-education" class="page">
+    <div class="page-header">
+      <div class="page-label">Edukasi</div>
+      <h1 class="page-title">Pahami Tubuhmu</h1>
+    </div>
+
+    <!-- Fase -->
+    <div class="card">
+      <div class="card-title">4 Fase Siklus Menstruasi</div>
+      <div class="tabs" id="edu-phase-tabs">
+        <button class="tab active" data-phase="menstruation">Menstruasi</button>
+        <button class="tab" data-phase="follicular">Folikular</button>
+        <button class="tab" data-phase="ovulation">Ovulasi</button>
+        <button class="tab" data-phase="luteal">Luteal</button>
+      </div>
+      <div id="edu-phase-content"></div>
+    </div>
+
+    <!-- Hormon -->
+    <div class="card">
+      <div class="card-title">Hormon Reproduksi</div>
+      <div class="tabs" id="edu-hormone-tabs">
+        <button class="tab" data-hormone="estrogen">Estrogen</button>
+        <button class="tab" data-hormone="progesterone">Progesteron</button>
+        <button class="tab" data-hormone="fsh">FSH</button>
+        <button class="tab" data-hormone="lh">LH</button>
+      </div>
+      <div id="edu-hormone-content"><p style="color:var(--ink-m);font-size:.88rem;padding:.5rem 0">Pilih hormon untuk membaca penjelasannya.</p></div>
+    </div>
+
+    <!-- Gejala -->
+    <div class="card">
+      <div class="card-title">Memahami Gejala</div>
+      <div class="tabs" id="edu-symptom-tabs">
+        <button class="tab" data-symptom="cramps">Kram</button>
+        <button class="tab" data-symptom="moodswing">Mood Swing</button>
+        <button class="tab" data-symptom="acne">Jerawat</button>
+        <button class="tab" data-symptom="fatigue">Kelelahan</button>
+        <button class="tab" data-symptom="breastpain">Nyeri Payudara</button>
+      </div>
+      <div id="edu-symptom-content"><p style="color:var(--ink-m);font-size:.88rem;padding:.5rem 0">Pilih gejala untuk penjelasan biologisnya.</p></div>
+    </div>
+  </section>
+
+  <!-- ───────── PAGE: ORGAN ───────── -->
+  <section id="page-organ" class="page">
+    <div class="page-header">
+      <div class="page-label">Anatomi</div>
+      <h1 class="page-title">Organ Reproduksi</h1>
+      <p class="page-desc">Kenali organ reproduksi perempuan dan fungsinya dalam siklus menstruasi.</p>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.25rem">
+        <button class="organ-btn tab active" data-organ="uterus">Uterus</button>
+        <button class="organ-btn tab" data-organ="ovary">Ovarium</button>
+        <button class="organ-btn tab" data-organ="endometrium">Endometrium & Serviks</button>
+      </div>
+      <div id="organ-info-panel" class="organ-info-panel">
+        <p style="color:var(--ink-m);font-size:.88rem">Pilih organ untuk melihat penjelasannya.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── PAGE: MOOD & GEJALA ───────── -->
+  <section id="page-mood" class="page">
+    <div class="page-header">
+      <div class="page-label">Tracker</div>
+      <h1 class="page-title">Mood & Gejala Hari Ini</h1>
+    </div>
+
+    <div class="tracker-grid">
+      <!-- Input -->
+      <div>
+        <div class="card">
+          <div class="card-title">Bagaimana perasaanmu?</div>
+          <div class="mood-grid">
+            <button class="mood-btn" data-mood="😄"><span class="emoji">😄</span>Sangat Baik</button>
+            <button class="mood-btn" data-mood="🙂"><span class="emoji">🙂</span>Baik</button>
+            <button class="mood-btn" data-mood="😐"><span class="emoji">😐</span>Biasa</button>
+            <button class="mood-btn" data-mood="🙁"><span class="emoji">🙁</span>Buruk</button>
+            <button class="mood-btn" data-mood="😢"><span class="emoji">😢</span>Sangat Buruk</button>
+          </div>
+
+          <label style="margin-top:1rem">Tingkat Nyeri</label>
+          <div class="slider-wrap">
+            <input type="range" id="pain-slider" min="0" max="10" value="0" aria-label="Tingkat nyeri" />
+            <div class="slider-labels">
+              <span>Tidak ada</span>
+              <span id="pain-slider-val">0</span>
+              <span>Sangat parah</span>
+            </div>
+          </div>
+
+          <label>Tingkat Energi</label>
+          <div class="slider-wrap">
+            <input type="range" id="energy-slider" min="0" max="10" value="5" aria-label="Tingkat energi" />
+            <div class="slider-labels">
+              <span>Lelah sekali</span>
+              <span id="energy-slider-val">5</span>
+              <span>Sangat berenergi</span>
+            </div>
+          </div>
+
+          <label>Gejala Hari Ini</label>
+          <div class="symptom-tag-grid">
+            <button class="symptom-tag" data-symptom="Kram">Kram</button>
+            <button class="symptom-tag" data-symptom="Sakit kepala">Sakit kepala</button>
+            <button class="symptom-tag" data-symptom="Kembung">Kembung</button>
+            <button class="symptom-tag" data-symptom="Nyeri punggung">Nyeri punggung</button>
+            <button class="symptom-tag" data-symptom="Mual">Mual</button>
+            <button class="symptom-tag" data-symptom="Jerawat">Jerawat</button>
+            <button class="symptom-tag" data-symptom="Mood swing">Mood swing</button>
+            <button class="symptom-tag" data-symptom="Cemas">Cemas</button>
+            <button class="symptom-tag" data-symptom="Nyeri payudara">Nyeri payudara</button>
+            <button class="symptom-tag" data-symptom="Susah tidur">Susah tidur</button>
+          </div>
+
+          <label style="margin-top:.75rem">Catatan (opsional)</label>
+          <textarea id="mood-notes" rows="2" placeholder="Tulis perasaan atau gejala lain…"
+            style="width:100%;padding:.65rem .9rem;border:1.5px solid rgba(194,122,140,.3);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--ink);background:var(--cream);resize:vertical;outline:none;margin-bottom:1rem"></textarea>
+
+          <button id="btn-save-mood" class="btn btn-mauve" style="width:100%">Simpan Catatan</button>
+        </div>
+      </div>
+
+      <!-- Riwayat + Chart -->
+      <div>
+        <div class="card">
+          <div class="card-title">Grafik Data</div>
+          <div class="chart-tabs">
+            <button class="chart-tab active" data-metric="mood">Mood</button>
+            <button class="chart-tab" data-metric="pain">Nyeri</button>
+            <button class="chart-tab" data-metric="energy">Energi</button>
+          </div>
+          <div class="chart-container">
+            <canvas id="mood-chart" class="chart"></canvas>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Riwayat 7 Hari Terakhir</div>
+          <div id="mood-history"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── PAGE: INSIGHTS ───────── -->
+  <section id="page-insights" class="page">
+    <div class="page-header">
+      <div class="page-label">Analisis</div>
+      <h1 class="page-title">Insights Kesehatanmu</h1>
+      <p class="page-desc">Pola dan temuan otomatis dari data yang kamu catat setiap hari.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Apa yang Ditemukan SISS?</div>
+      <div id="insights-list"></div>
+    </div>
+
+    <div class="card" style="background:linear-gradient(135deg,var(--blush),var(--white))">
+      <div class="card-title">Catatan Penting</div>
+      <p style="font-size:.87rem;color:var(--ink-m);line-height:1.7">
+        Insights ini dihasilkan dari pola data yang kamu catat secara mandiri. 
+        Ini <strong>bukan diagnosis medis</strong>. Untuk kekhawatiran kesehatan, 
+        selalu konsultasikan dengan tenaga medis profesional.
+      </p>
+    </div>
+  </section>
+
+  <!-- ───────── PAGE: SEARCH ───────── -->
+  <section id="page-search" class="page">
+    <div class="page-header">
+      <div class="page-label">Pencarian</div>
+      <h1 class="page-title">Cari Topik 🔍</h1>
+    </div>
+
+    <div class="search-big">
+      <span class="si"></span>
+      <input id="search-input" type="search" placeholder="Cari fase, hormon, gejala, organ…" aria-label="Cari konten edukasi" />
+    </div>
+
+    <div class="search-chips">
+      <button class="search-chip">Kram</button>
+      <button class="search-chip">Ovulasi</button>
+      <button class="search-chip">Estrogen</button>
+      <button class="search-chip">Mood swing</button>
+      <button class="search-chip">Folikular</button>
+      <button class="search-chip">Progesteron</button>
+      <button class="search-chip">Uterus</button>
+      <button class="search-chip">PMS</button>
+    </div>
+
+    <div id="search-results"></div>
+  </section>
+
+</div><!-- /main -->
+
+<!-- Toast Notification -->
+<div id="toast" role="alert" aria-live="polite"></div>
+
+<!-- JS Modules -->
+<script type="module" src="assets/js/init.js"></script>
+
+<!-- Global nav helper untuk onclick di HTML (fallback non-module) -->
+<script>
+  window.__SISS_NAV__ = function(page) {
+    window.dispatchEvent(new CustomEvent('__siss_goto__', { detail: page }));
+  };
+  window.addEventListener('__siss_goto__', e => {
+    import('./assets/js/navigation.js').then(m => m.goTo(e.detail));
+  });
+</script>
+
+</body>
+</html>
